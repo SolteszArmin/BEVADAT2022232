@@ -1,0 +1,2 @@
+gyak="sajt"
+print(gyak)
