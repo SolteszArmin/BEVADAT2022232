@@ -1,9 +1,8 @@
+
 import numpy as np
 
 def column_swap(inputArray:np.array)->np.array:
-    temp=np.copy(inputArray[:,0])
-    inputArray[:,0]=inputArray[:,1]
-    inputArray[:,1]=temp
+    inputArray=np.fliplr(inputArray)
     return inputArray
 
 def compare_two_array(inputArray1:np.array,inputArray2:np.array)->np.array:
@@ -12,11 +11,12 @@ def compare_two_array(inputArray1:np.array,inputArray2:np.array)->np.array:
 def get_array_shape(inputArray:np.array)->str:
    output=""
    a=np.shape(inputArray)
-   if (len(a)==2):
+   if (len(a)==1):
+      output+=f"sor: {a[0]}, oszlop: 1, melyseg: 1"
+   elif(len(a)==2):
       output+=f"sor: {a[0]}, oszlop: {a[1]}, melyseg: 1"
    else:
       output+=f"sor: {a[0]}, oszlop: {a[1]}, melyseg: {a[2]}"
-
    return output
 
 def encode_Y(InputArray:np.array,classCount:int)->np.array:
@@ -32,7 +32,7 @@ def eval_classification(itemList:list,inputArray:np.array)->str:
     return itemList[index[0][0]]
 
 def repalce_odd_numbers(inputArray:np.array)->np.array:
-    inputArray[(inputArray%2!=0)]=-1
+    inputArray[inputArray%2!=0]=-1
     return inputArray
 
 def replace_by_value(inputArray:np.array,compareValue:int)->np.array:
@@ -43,6 +43,7 @@ def replace_by_value(inputArray:np.array,compareValue:int)->np.array:
 def array_multi(inputArray:np.array):
     return np.prod(inputArray)
 
+
 def array_multi_2d(inputArray:np.array)->np.array:
     return np.multiply.reduce(inputArray,axis=1)
 
@@ -52,8 +53,8 @@ def add_border(inputArray:np.array)->np.array:
 def list_days(startDate:str,endDate:str)->np.array:
     return np.array(np.arange(startDate+'-01',endDate+'-01',dtype=np.datetime64))
 
-def actual_date()->str:
-    return np.datetime64('today')
+def actual_date()->np.datetime64:
+    return np.datetime64('now','D')
 
 def sec_from_1970()->int:
     return np.datetime64('now','s') - np.datetime64('1970-01-01T00:02:00')
